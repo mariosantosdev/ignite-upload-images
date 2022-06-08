@@ -40,8 +40,9 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
         lessThan10MB: (files: File[]) =>
           files[0].size < 10485760 || 'O arquivo deve ser menor que 10MB',
         acceptedFormats: (files: File[]) => {
-          const acceptedFormats = ['image/jpeg', 'image/png', 'image/gif'];
-          const isAcceptedFormat = acceptedFormats.includes(files[0].type);
+          const acceptedFormatsRegex =
+            /(?:([^:/?#]+):)?(?:([^/?#]*))?([^?#](?:jpeg|gif|png))(?:\?([^#]*))?(?:#(.*))?/g;
+          const isAcceptedFormat = acceptedFormatsRegex.test(files[0].type);
           return (
             isAcceptedFormat || 'Somente são aceitos arquivos PNG, JPEG e GIF'
           );
