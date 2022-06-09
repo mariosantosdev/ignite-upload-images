@@ -28,8 +28,8 @@ export function ModalViewImage({
         </ModalBody>
 
         <ModalFooter>
-          <Link href={imgUrl} isExternal>
-            Abrir Original
+          <Link href={imgUrl} isExternal fontSize="1rem" mr="auto">
+            Abrir original
           </Link>
         </ModalFooter>
       </ModalContent>
