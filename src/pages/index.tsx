@@ -1,5 +1,5 @@
 import { Button, Box } from '@chakra-ui/react';
-import { useCallback, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useInfiniteQuery } from 'react-query';
 
 import { Header } from '../components/Header';
@@ -20,16 +20,16 @@ type FetchImagesResponse = {
 };
 
 export default function Home(): JSX.Element {
-  const fetchImages = useCallback(
-    async ({ pageParam = '' }): Promise<FetchImagesResponse> => {
-      const { data } = await api.get<FetchImagesResponse>(
-        `/api/images?after=${pageParam}`
-      );
-
-      return data;
-    },
-    []
-  );
+  async function fetchImages({
+    pageParam = null,
+  }): Promise<FetchImagesResponse> {
+    const { data } = await api('/api/images', {
+      params: {
+        after: pageParam,
+      },
+    });
+    return data;
+  }
 
   const {
     data,
